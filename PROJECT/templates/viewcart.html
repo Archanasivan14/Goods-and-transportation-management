@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Cart Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background-color: #273c7e; /* Dark blue */
+        }
+        .navbar-brand {
+            color: #d2691e; /* Chocolate */
+            font-style: italic;
+            font-size: 2rem;
+        }
+        .navbar-nav .nav-link {
+            color: #ffffff; /* White */
+        }
+        .navbar-nav .nav-link.active {
+            color: #d3d3d3; /* Light grey for active link */
+        }
+        .cart {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            width: 18rem;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.02);
+        }
+        .card-img-top {
+            height: 250px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .card-body {
+            padding: 15px;
+            text-align: center;
+        }
+        .card-body h3, .card-body h5 {
+            margin-bottom: 10px;
+        }
+        .btn-remove {
+            background-color: #dc3545; /* Red */
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .btn-remove:hover {
+            background-color: #c82333; /* Darker red */
+        }
+        .total-container {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+        .total {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .total label, .total p {
+            color: #273c7e; /* Dark blue */
+            font-size: 25px;
+        }
+        .total input {
+            border: none;
+            color: #007bff; /* Blue */
+            font-size: 25px;
+            text-align: center;
+        }
+        .btn-place-order {
+            background-color: #273c7e; /* Dark blue */
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 20px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .btn-place-order:hover {
+            background-color: #1a2e6b; /* Darker blue */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index">BYNOW</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+             {% if request.session.ema %}
+              <li class="nav-item">
+                <a class="nav-link" href="signout" style="color: white;">Logout</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="signin" style="color: white;">Signin</a>
+              </li>
+              {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="alldata">Explore</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="search">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="wishlist">Wishlist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="viewcart">Cart</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <form method="post" action="details" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="cart">
+            <h3 style="color:darkblue; width: 100%; text-align: center;">{{info}}</h3>
+            {% for m in cartitems %}
+            <div class="card">
+                <img src="{{m.product.im.url}}" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <h3>{{m.product.nm}}</h3>
+                    <h3>{{m.product.br}}</h3>
+                    <h5>Price: ₹{{m.product.pr}}</h5>
+                    <input type="hidden" value="{{m.product.pr}}" name="prc">
+                    <h5>Quantity: {{m.quantity}}</h5>
+                    <p>{{m.product.of}}</p>
+                    <a href="/removefromcart?idn={{m.id}}" class="btn-remove">Remove</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="total-container">
+            <div class="total">
+                <label>Total:</label>
+                <p><input type="text" readonly value="{{total_price}}" name="tot">&nbsp;Rs/-</p>
+                <a href="/details?idn={{m.id}}" class="btn-place-order">Place Order</a>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+

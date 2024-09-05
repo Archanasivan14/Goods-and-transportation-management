@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #273c7e; /* Dark blue */
+        }
+        .navbar-brand {
+            color: #d2691e; /* Chocolate color */
+            font-style: italic;
+            font-size: 2rem;
+        }
+        .navbar-nav .nav-link {
+            color: #ffffff; /* White color */
+        }
+        .navbar-nav .nav-link.active {
+            color: #d3d3d3; /* Light grey for active link */
+        }
+        .cart {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            width: 18rem;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.02);
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .card-body {
+            padding: 15px;
+            text-align: center;
+        }
+        .card-body h3 {
+            font-size: 1.25rem;
+            color: #343a40;
+            margin-bottom: 10px;
+        }
+        .card-body h4 {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+        .card-body h5 {
+            font-size: 1.1rem;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        .card-body p {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+        .btn {
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+            text-align: center;
+        }
+        .btn-add-to-cart {
+            background-color: #28a745; /* Green */
+        }
+        .btn-add-to-cart:hover {
+            background-color: #218838; /* Darker green */
+        }
+        .btn-remove {
+            background-color: #dc3545; /* Red */
+        }
+        .btn-remove:hover {
+            background-color: #c82333; /* Darker red */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index">BYNOW</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              {% if request.session.ema %}
+              <li class="nav-item">
+                <a class="nav-link" href="signout" style="color: white;">Logout</a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="signin" style="color: white;">Signin</a>
+              </li>
+              {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="alldata">Explore</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="search">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="wishlist">Wishlist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="viewcart">Cart</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="cart">
+        <h3 style="color: darkblue; width: 100%; text-align: center;">{{info}}</h3>
+        {% for i in wishlistitems %}
+        <div class="card">
+            <img src="{{i.product.im.url}}" class="card-img-top" alt="Product Image">
+            <div class="card-body">
+                <h3>{{i.product.nm}}</h3>
+                <h4>Brand: {{i.product.br}}</h4>
+                <h5>Price: ₹{{i.product.pr}}</h5>
+                <p>{{i.product.of}}</p>
+                <a href="/addtocart?idn={{i.product.id}}" class="btn btn-add-to-cart">Add To Cart</a>
+                <a href="/removefromwishlist?idn={{i.id}}" class="btn btn-remove">Remove</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

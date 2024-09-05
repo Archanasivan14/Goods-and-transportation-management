@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>upi payment</title>
+    <style>
+      .navbar {
+            background-color: #273c7e; /* Dark blue */
+        }
+        .navbar-brand {
+            color: #d2691e; /* Chocolate */
+            font-style: italic;
+            font-size: 2rem;
+        }
+        .navbar-nav .nav-link {
+            color: #ffffff; /* White */
+        }
+        .navbar-nav .nav-link.active {
+            color: #d3d3d3; /* Light grey for active link */
+        }
+        body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+
+        }
+        .row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  margin: 0 -5px;
+}
+
+.col-25 {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+}
+
+.col-50 {
+  -ms-flex: 50%; /* IE10 */
+  flex: 50%;
+}
+
+.col-75 {
+  -ms-flex: 75%; /* IE10 */
+  flex: 75%;
+}
+
+.col-25,
+.col-50,
+.col-75 {
+  padding: 0 16px;
+}
+
+.container {
+  max-width: 600px;
+  background-color: #f2f2f2;
+  padding: 5px 20px 15px 20px;
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+  margin: 50px auto;
+}
+input[type=text] {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+label {
+  margin-bottom: 10px;
+  display: block;
+}
+
+.icon-container {
+  margin-bottom: 20px;
+  padding: 7px 0;
+  font-size: 24px;
+}
+
+.btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+span.price {
+  float: right;
+  color: grey;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (and change the direction - make the "cart" column go on top) */
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column-reverse;
+  }
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index">BYNOW</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% if request.session.ema %}
+          <li class="nav-item">
+            <a class="nav-link" href="signout" style="color: white;">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="signin" style="color: white;">Signin</a>
+          </li>
+          {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="alldata">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="search">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="wishlist">Wishlist</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="viewcart">Cart</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>  
+    <div class="row">
+        <div class="col-75">
+          <div class="container">
+            <form method="POST" action="">              
+              {% csrf_token %}         
+                <div class="col-50">
+                  <h1>UPI Payment</h1>                  
+                  <div class="icon-container">
+                    <i class="fa fa-cc-visa" style="color:navy;"></i>
+                    <i class="fa fa-cc-amex" style="color:blue;"></i>
+                    <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                    <i class="fa fa-cc-discover" style="color:orange;"></i>
+                  </div>
+                  <div class="col-50">
+                  <label for="bname">Bank Name</label>
+                  <input type="text" id="bname" name="bname">                 
+                </div>
+                    <div class="col-50">
+                      <label for="upi">UPI ID</label>
+                      <input type="text" id="upi" name="upi">
+                    </div>
+                    <input type="submit" href="placed" value="Proceed To Pay" class="btn">
+                  </div>
+                </div>      
+              </div>                
+            </form>
+          </div>
+        </div>            
+</body>
+</html>

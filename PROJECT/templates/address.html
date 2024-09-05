@@ -1,0 +1,186 @@
+<!-- {% load static %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-12 col-xl-11">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5">
+              <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+  
+                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Deliver to:</p>
+  
+                  <form class="mx-1 mx-md-4" method="POST" action="address">
+                    {% csrf_token %}
+                    <h2 style="color:rgb(5, 78, 17);">{{success}}</h2>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                        <input type="text" name="name" id="form3Example1c" class="form-control" />
+                        <label class="form-label" for="form3Example1c">Full Name</label>
+                      </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                        <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                          <input type="number" name="mob" id="form3Example4cd" class="form-control" />
+                          <label class="form-label" for="form3Example4cd">Mobile Number</label>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                        <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                          <input type="number" name="amb" id="form3Example4cd" class="form-control" />
+                          <label class="form-label" for="form3Example4cd">Alternate Mobile Number</label>
+                        </div>
+                    </div>  
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                        <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                          <input type="number" name="pin" id="form3Example4cd" class="form-control" />
+                          <label class="form-label" for="form3Example4cd">Pincode</label>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                          <input type="text" name="st" id="form3Example1c" class="form-control" />
+                          <label class="form-label" for="form3Example1c">State</label>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                          <input type="text" name="cty" id="form3Example1c" class="form-control" />
+                          <label class="form-label" for="form3Example1c">City</label>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                          <input type="text" name="hs" id="form3Example1c" class="form-control" />
+                          <label class="form-label" for="form3Example1c">House No/Building Name</label>
+                        </div>
+                      </div>
+                      <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                          <input type="text" name="rd" id="form3Example1c" class="form-control" />
+                          <label class="form-label" for="form3Example1c">Road Name,Area,Colony</label>
+                        </div>
+                      </div>                 
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg">Save Address</button>
+                    </div>
+                  </div>                                  
+                  </form>  
+                </div>             
+  
+                  
+  
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .form-outline {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        .form-outline .form-control {
+            border-radius: 10px;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .form-outline .form-label {
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+        .btn-primary {
+            background-color: #005b96;
+            border-color: #005b96;
+        }
+        .btn-primary:hover {
+            background-color: #004080;
+            border-color: #004080;
+        }
+    </style>
+</head>
+<body>
+    <section class="vh-100 d-flex align-items-center" style="background-color: #e9ecef;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-xl-6">
+                    <div class="card text-black">
+                        <div class="card-body p-5">
+                            <h1 class="text-center font-weight-bold mb-4">Deliver to:</h1>
+                            <form method="POST" action="address">
+                                {% csrf_token %}
+                                <h2 class="text-success">{{ success }}</h2>
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="name" id="formName" class="form-control" />
+                                    <label class="form-label" for="formName">Full Name</label>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="mob" id="formMobile" class="form-control" />
+                                    <label class="form-label" for="formMobile">Mobile Number</label>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="amb" id="formAltMobile" class="form-control" />
+                                    <label class="form-label" for="formAltMobile">Alternate Mobile Number</label>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="pin" id="formPin" class="form-control" />
+                                    <label class="form-label" for="formPin">Pincode</label>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="st" id="formState" class="form-control" />
+                                    <label class="form-label" for="formState">State</label>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="cty" id="formCity" class="form-control" />
+                                    <label class="form-label" for="formCity">City</label>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="hs" id="formHouse" class="form-control" />
+                                    <label class="form-label" for="formHouse">House No/Building Name</label>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input type="text" name="rd" id="formRoad" class="form-control" />
+                                    <label class="form-label" for="formRoad">Road Name, Area, Colony</label>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-primary btn-lg">Save Address</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
