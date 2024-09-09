@@ -122,6 +122,37 @@
     background-color: #0056b3;
     box-shadow: 0 6px 8px rgba(0, 86, 179, 0.3);
 }
+  p {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  .radio-group {
+    margin-bottom: 10px;
+  }
+  
+  input[type="radio"] {
+    margin-right: 8px;
+  }
+  
+  label {
+    font-size: 1em;
+  }
+  
+  input[type="submit"] {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
     </style>
 </head>
 <body>
@@ -173,29 +204,19 @@
             </div>
         </div>
     </nav>
-    <div class="container">
-        {% for m in status %}
-        <div class="card">
-            <div class="card-content">
-                <div class="info">
-                    <h4>{{ m.nm }}</h4>
-                    <h5>{{ m.mob }}</h5>
-                    <h5>{{ m.hous }}</h5>
-                    <h5>{{ m.road }}</h5>
-                    <h5>{{ m.city }}</h5>
-                    <h5>{{ m.stat }}</h5>
-                    <h5>{{ m.pin }}</h5>
-                    <h5>Total Amount: {{ m.totalprice }}</h3>
-                </div>
-                <div class="order-status">
-                    <span class="status-label">{{ m.orderstatus }}</span>
-                </div>
-            </div>
-        </div>
-        {% empty %}
-        <li>No orders found.</li>
-        {% endfor %}
+    <form action="{% url 'newstatus' oid=order.id %}" method="POST">   
+    {% csrf_token %}          
+    <p>Select Status</p>
 
-    </div>
+  <input type="radio" id="Pending" name="status" value="Pending">
+  <label for="Pending">Pending</label><br>
+
+  <input type="radio" id="Paid" name="status" value="Paid">
+  <label for="Paid">Paid</label><br>
+
+  <input type="radio" id="Delivered" name="status" value="Delivered">
+  <label for="Delivered">Delivered</label><br>
+  <input type="submit" value="Update">
+    </form>
 </body>
 </html>

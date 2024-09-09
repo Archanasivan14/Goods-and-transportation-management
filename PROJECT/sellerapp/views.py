@@ -1,6 +1,6 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from . models import login_tbl
-from shopping.models import product_tbl
+from shopping.models import product_tbl,order_tbl
 # Create your views here.
 def sellerreg(request):
     if request.method=='POST':
@@ -18,7 +18,21 @@ def sellerreg(request):
             return render(request,"sellerreg.html")
     else:
         return render(request,"sellerreg.html")
-
+def allorder(request):
+    obj=order_tbl.objects.filter()
+    return render(request,"allorder.html",{"key":obj}) 
+def statuschange(request,oid):
+    status=order_tbl.objects.get(id=oid)
+    return render(request,"statuschange.html",{"order":status})
+def newstatus(request,oid):
+    if request.method == 'POST':
+        selected_status = request.POST.get('status')        
+        if selected_status:
+            order = order_tbl.objects.get(id=oid)
+            order.orderstatus = selected_status
+            order.save()
+            return redirect('/sellerapp/allorder')
+    return render(request, 'statuschange.html', {'oid': oid})
 def logout(request):
     del request.session['ema']
     del request.session['idl']

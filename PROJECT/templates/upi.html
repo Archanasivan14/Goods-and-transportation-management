@@ -115,40 +115,7 @@ span.price {
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="index">BYNOW</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          {% if request.session.ema %}
-          <li class="nav-item">
-            <a class="nav-link" href="signout" style="color: white;">Logout</a>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="signin" style="color: white;">Signin</a>
-          </li>
-          {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="alldata">Explore</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="search">Search</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="wishlist">Wishlist</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="viewcart">Cart</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>  
-    <div class="row">
+     <div class="row">
         <div class="col-75">
           <div class="container">
             <form method="POST" action="">              
@@ -163,11 +130,11 @@ span.price {
                   </div>
                   <div class="col-50">
                   <label for="bname">Bank Name</label>
-                  <input type="text" id="bname" name="bname">                 
+                  <input type="text" id="bname" name="bname" required>                 
                 </div>
                     <div class="col-50">
                       <label for="upi">UPI ID</label>
-                      <input type="text" id="upi" name="upi">
+                      <input type="text" id="upi" name="upi" required>
                     </div>
                     <input type="submit" href="placed" value="Proceed To Pay" class="btn">
                   </div>

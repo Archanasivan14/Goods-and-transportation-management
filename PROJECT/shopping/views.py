@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from sellerapp.models import login_tbl
-from . models import shop_tbl,product_tbl,cart_tbl,wishlist_tbl,address_tbl,order_tbl
+from . models import shop_tbl,product_tbl,cart_tbl,wishlist_tbl,order_tbl
 from django.contrib import messages
 def index(request):
     return render(request,"index.html")
@@ -125,26 +125,6 @@ def removefromwishlist(request):
     obj=wishlist_tbl.objects.filter(id=number)
     obj.delete()
     return redirect("/wishlist")
-def address(request):
-    if request.method=='POST':
-        name=request.POST.get('name')
-        mob=request.POST.get('mob')
-        amb=request.POST.get('amb')
-        pin=request.POST.get('pin')
-        st=request.POST.get('st')
-        cty=request.POST.get('cty')
-        hs=request.POST.get('hs')
-        rd=request.POST.get('rd')
-        obj=address_tbl.objects.create(name=name,mob=mob,amb=amb,pin=pin,st=st,cty=cty,hs=hs,rd=rd)
-        obj.save()
-        if obj:
-            return redirect("/payment")
-        else:
-            return render(request,"address.html")
-    else:
-        idno=request.GET.get('idn')
-        request.session['cartid']=idno
-        return render(request,"address.html")
 def details(request):
     cid=request.session['idl']
     cusobj=shop_tbl.objects.get(id=cid)
@@ -156,9 +136,7 @@ def details(request):
             total_price=total_price+pro
         return render(request,"details.html",{'cartitems':cartobj,'total_price':int(total_price),"address":cusobj})
     return render(request,"viewcart.html")
-def myorder(request):
-    obj=order_tbl.objects.all()
-    return render(request,"myorder.html",{"key":obj})      
+ 
 def payment(request):
     return render(request,"payment.html")
 def creditcard(request):
@@ -175,10 +153,8 @@ def netbanking(request):
     return render(request,"netbanking.html")
 def placed(request):
     if request.method == 'POST':
-        # Get the total price from the form
         totalprice = request.POST.get('newprice')
         product= request.POST.get('')
-        # Check if the user has provided a new address
         nm = request.POST.get('name') or request.POST.get('fn')
         mob = request.POST.get('mb') or request.POST.get('mb')
         stat = request.POST.get('st') or request.POST.get('state')
@@ -186,8 +162,8 @@ def placed(request):
         road = request.POST.get('rd') or request.POST.get('road')
         hous = request.POST.get('hs') or request.POST.get('house')
         pin = request.POST.get('pin') or request.POST.get('pincode')
-
-        # Create and save the order with correct field names
+        cid=request.session['idl']
+        uobj=shop_tbl.objects.get(id=cid)
         obc = order_tbl.objects.create(
             nm=nm,
             mob=mob,
@@ -197,14 +173,20 @@ def placed(request):
             hous=hous,
             pin=pin,
             totalprice=totalprice,
-            orderstatus='Pending'  # Assuming default order status is 'Pending'
+            orderstatus='Pending',
+            customer=uobj
         )
         obc.save()
-        # Render the payment page after creating the order
         return render(request, "payment.html")
-
-    # In case of a GET request or other method, render the order form
     return render(request, "details.html")
+def myorder(request):
+    cid=request.session['idl']
+    uobj=shop_tbl.objects.get(id=cid)
+    oobj=order_tbl.objects.filter(customer=uobj)
+    return render(request,"myorder.html",{"status":oobj})
+
+
+
 
 
 

@@ -173,8 +173,9 @@
             </div>
         </div>
     </nav>
+    {% if key %}
     <div class="container">
-        {% for m in status %}
+        {% for m in key %}
         <div class="card">
             <div class="card-content">
                 <div class="info">
@@ -189,13 +190,12 @@
                 </div>
                 <div class="order-status">
                     <span class="status-label">{{ m.orderstatus }}</span>
+                    <button><a href="{% url 'statuschange' oid=m.id %}">Change Status</a></button>
                 </div>
             </div>
         </div>
-        {% empty %}
-        <li>No orders found.</li>
         {% endfor %}
-
     </div>
+    {% endif %}
 </body>
 </html>

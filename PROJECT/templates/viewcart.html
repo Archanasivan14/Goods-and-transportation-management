@@ -26,8 +26,28 @@
             color: #ffffff; /* White */
         }
         .navbar-nav .nav-link.active {
-            color: #d3d3d3; /* Light grey for active link */
+            color: #ffffff; /* Light grey for active link */
         }
+        .navbar .dropdown-menu {
+    background-color: #495057; /* Dark background for dropdown */
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Subtle shadow */
+}
+
+.navbar .dropdown-item {
+    color: #fff; /* White text color */
+    padding: 10px 20px; /* Padding for dropdown items */
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.navbar .dropdown-item:hover {
+    background-color: #6c757d; /* Slightly lighter background on hover */
+}
+
+.navbar .dropdown-divider {
+    border-top: 1px solid #6c757d; /* Divider style */
+}
         .cart {
             display: flex;
             flex-wrap: wrap;
@@ -122,15 +142,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-             {% if request.session.ema %}
-              <li class="nav-item">
-                <a class="nav-link" href="signout" style="color: white;">Logout</a>
-              </li>
-              {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="signin" style="color: white;">Signin</a>
-              </li>
-              {% endif %}
+                  {% if request.session.ema %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="signout" style="color: white;">Logout</a>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="signin" style="color: white;">Signin</a>
+                  </li>
+                  {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="alldata">Explore</a>
                     </li>
@@ -143,6 +163,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="viewcart">Cart</a>
                     </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="myorder">My Orders</a>
+                  </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Admin 
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        {% if request.session.ema %}
+                        <a class="dropdown-item" href="sellerapp/logout">Logout</a>
+                        {% else %}
+                        <a class="dropdown-item" href="sellerapp/sellerreg">Login</a>
+                        {% endif %}
+                      </div>
+                  </li>
                 </ul>
             </div>
         </div>

@@ -19,7 +19,6 @@ urlpatterns = [
     path('viewcart',views.viewcart),
     path('removefromcart',views.removefromcart),
     path('removefromwishlist',views.removefromwishlist),
-    path('address',views.address),
     path('details',views.details),
     path('payment',views.payment),
     path('creditcard',views.creditcard),

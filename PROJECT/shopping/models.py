@@ -29,12 +29,12 @@ class cart_tbl(models.Model):
     product=models.ForeignKey(product_tbl,on_delete=models.CASCADE)
     quantity=models.PositiveIntegerField(default=1)
     def __str__(self):
-        return self.product
+        return self.product.nm
 class wishlist_tbl(models.Model):
     customer=models.ForeignKey(shop_tbl,on_delete=models.CASCADE)
     product=models.ForeignKey(product_tbl,on_delete=models.CASCADE)
     def __str__(self):
-        return self.product
+        return self.product.nm
 class address_tbl(models.Model):
     name=models.CharField(max_length=30)
     mob=models.IntegerField()
@@ -48,12 +48,11 @@ class address_tbl(models.Model):
         return self.name
 STATUS_CHOICE = (
 ("pending", "Pending"),
-("processing", "Processing"),
-("Shipped", "Shipped"),
+("paid", "paid"),
 ("delivered", "delivered"),
-("Cancelled", "Cancelled"),
 )
 class order_tbl(models.Model):
+    customer=models.ForeignKey(shop_tbl,on_delete=models.CASCADE,null=True,related_name='selecteduserobjs')
     nm=models.CharField(max_length=30)
     mob=models.IntegerField()
     pin=models.IntegerField()
